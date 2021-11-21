@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class VendaService {
+public class VendaService extends AbstractVendaService{
 
     private VendaRepository vendaRepository;
     private ClienteService clienteService;
@@ -34,8 +34,7 @@ public class VendaService {
     public ClienteVendaResponseDTO listAllByClienteId(Long idCLliente){
         Cliente cliente = validClienteVendaExists(idCLliente);
         List<VendaResponseDTO> vendaResponseDTOS = vendaRepository.findByClienteId(idCLliente).stream()
-                .map(venda -> createVendaResponseDTO(venda))
-                .collect(Collectors.toList());
+                .map(venda -> createVendaResponseDTO(venda, itemVendaRepository.findByVendaId(venda.getId()))).collect(Collectors.toList());
         return new ClienteVendaResponseDTO(cliente.getNome(), vendaResponseDTOS);
 
     }
@@ -43,7 +42,7 @@ public class VendaService {
     public ClienteVendaResponseDTO listAllById(Long id){
         Venda venda = validVendaExists(id);
         return new ClienteVendaResponseDTO(venda.getCliente().getNome(),
-                Arrays.asList(createVendaResponseDTO(venda)));
+                Arrays.asList(createVendaResponseDTO(venda, itemVendaRepository.findByVendaId(venda.getId()))));
     }
 
     private Venda validVendaExists(Long id){
@@ -62,27 +61,5 @@ public class VendaService {
         return cliente.get();
     }
 
-    private VendaResponseDTO createVendaResponseDTO(Venda venda){
-        List<ItemVendaResponseDTO> itensVendas = itemVendaRepository
-                .findByVendaId(venda.getId())
-                .stream().map(itemVenda -> createItemVendaResponseDTO(itemVenda))
-                .collect(Collectors.toList());
 
-        return new VendaResponseDTO(
-                venda.getId(),
-                venda.getData(),
-                itensVendas
-                );
     }
-
-    private ItemVendaResponseDTO createItemVendaResponseDTO(ItemVenda itemVenda){
-
-        return new ItemVendaResponseDTO(
-                itemVenda.getId(),
-                itemVenda.getQuantidade(),
-                itemVenda.getPrecoVendido(),
-                itemVenda.getProduto().getId(),
-                itemVenda.getProduto().getDescricao()
-        );
-    }
-}
