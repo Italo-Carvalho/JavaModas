@@ -19,12 +19,17 @@ public class VendaController {
     @Autowired
     private VendaService vendaService;
 
-    @ApiOperation(value = "Listar vendas por cliente", nickname = "listVendasByCliente")
-    @GetMapping("/cliente/{clienteId}")
-    public ResponseEntity<ClienteVendaResponseDTO> listByCliente(@PathVariable Long clienteId){
-        return ResponseEntity.ok(vendaService.listVendaByCliente(clienteId));
+    @ApiOperation(value = "Listar vendas por id", nickname = "listVendasById")
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteVendaResponseDTO> listById(@PathVariable Long id){
+        return ResponseEntity.ok(vendaService.listAllById(id));
     }
 
 
-    
+    @ApiOperation(value = "Listar vendas por cliente", nickname = "listVendasByCliente")
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<ClienteVendaResponseDTO> listByCliente(@PathVariable Long clienteId){
+        return ResponseEntity.ok(vendaService.listAllByClienteId(clienteId));
+    }
+
 }

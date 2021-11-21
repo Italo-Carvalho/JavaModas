@@ -1,6 +1,5 @@
 package br.com.javamodas.service;
 
-import br.com.javamodas.dto.cliente.ClienteRequestDTO;
 import br.com.javamodas.dto.venda.ClienteVendaResponseDTO;
 import br.com.javamodas.dto.venda.ItemVendaResponseDTO;
 import br.com.javamodas.dto.venda.VendaResponseDTO;
@@ -13,6 +12,7 @@ import br.com.javamodas.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,13 +31,27 @@ public class VendaService {
         this.itemVendaRepository = itemVendaRepository;
     }
 
-    public ClienteVendaResponseDTO listVendaByCliente(Long idCLliente){
+    public ClienteVendaResponseDTO listAllByClienteId(Long idCLliente){
         Cliente cliente = validClienteVendaExists(idCLliente);
         List<VendaResponseDTO> vendaResponseDTOS = vendaRepository.findByClienteId(idCLliente).stream()
                 .map(venda -> createVendaResponseDTO(venda))
                 .collect(Collectors.toList());
         return new ClienteVendaResponseDTO(cliente.getNome(), vendaResponseDTOS);
 
+    }
+
+    public ClienteVendaResponseDTO listAllById(Long id){
+        Venda venda = validVendaExists(id);
+        return new ClienteVendaResponseDTO(venda.getCliente().getNome(),
+                Arrays.asList(createVendaResponseDTO(venda)));
+    }
+
+    private Venda validVendaExists(Long id){
+        Optional<Venda> venda = vendaRepository.findById(id);
+        if (venda.isEmpty()){
+            throw new BusinessRuleException(String.format("O venda de Id %s não existe", id));
+        }
+        return venda.get();
     }
 
     private Cliente validClienteVendaExists(Long idCLliente) {
