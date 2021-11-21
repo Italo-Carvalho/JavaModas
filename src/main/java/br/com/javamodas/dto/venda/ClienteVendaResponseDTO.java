@@ -12,11 +12,11 @@ public class ClienteVendaResponseDTO {
     private String nome;
 
     @ApiModelProperty(value = "Vendas")
-    private List<VendaResponseDTO> vendaResponseDTOS;
+    private List<VendaResponseDTO> venda;
 
-    public ClienteVendaResponseDTO(String nome, List<VendaResponseDTO> vendaResponseDTOS) {
+    public ClienteVendaResponseDTO(String nome, List<VendaResponseDTO> venda) {
         this.nome = nome;
-        this.vendaResponseDTOS = vendaResponseDTOS;
+        this.venda = venda;
     }
 
     public String getNome() {
@@ -27,11 +27,11 @@ public class ClienteVendaResponseDTO {
         this.nome = nome;
     }
 
-    public List<VendaResponseDTO> getVendaResponseDTOS() {
-        return vendaResponseDTOS;
+    public List<VendaResponseDTO> getvenda() {
+        return venda;
     }
 
-    public void setVendaResponseDTOS(List<VendaResponseDTO> vendaResponseDTOS) {
-        this.vendaResponseDTOS = vendaResponseDTOS;
+    public void setvenda(List<VendaResponseDTO> venda) {
+        this.venda = venda;
     }
 }

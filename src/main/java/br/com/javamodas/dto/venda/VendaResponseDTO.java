@@ -16,12 +16,12 @@ public class VendaResponseDTO {
     private LocalDate data;
 
     @ApiModelProperty(value = "Itens da venda")
-    private List<ItemVendaResponseDTO> itemVendaResponseDTOS;
+    private List<ItemVendaResponseDTO> itensVenda;
 
-    public VendaResponseDTO(Long id, LocalDate data, List<ItemVendaResponseDTO> itemVendaResponseDTOS) {
+    public VendaResponseDTO(Long id, LocalDate data, List<ItemVendaResponseDTO> itensVenda) {
         this.id = id;
         this.data = data;
-        this.itemVendaResponseDTOS = itemVendaResponseDTOS;
+        this.itensVenda = itensVenda;
     }
 
 
@@ -41,11 +41,11 @@ public class VendaResponseDTO {
         this.data = data;
     }
 
-    public List<ItemVendaResponseDTO> getItemVendaResponseDTOS() {
-        return itemVendaResponseDTOS;
+    public List<ItemVendaResponseDTO> getitensVenda() {
+        return itensVenda;
     }
 
-    public void setItemVendaResponseDTOS(List<ItemVendaResponseDTO> itemVendaResponseDTOS) {
-        this.itemVendaResponseDTOS = itemVendaResponseDTOS;
+    public void setitensVenda(List<ItemVendaResponseDTO> itensVenda) {
+        this.itensVenda = itensVenda;
     }
 }
