@@ -29,6 +29,15 @@ public class ItemVenda {
     @JoinColumn(name = "id_venda", referencedColumnName = "id")
     private Venda venda;
 
+    public ItemVenda(Integer quantidade, BigDecimal precoVendido, Produto produto, Venda venda) {
+        this.quantidade = quantidade;
+        this.precoVendido = precoVendido;
+        this.produto = produto;
+        this.venda = venda;
+    }
+
+    public ItemVenda() {}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

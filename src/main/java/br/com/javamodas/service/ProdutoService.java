@@ -3,6 +3,7 @@ package br.com.javamodas.service;
 import br.com.javamodas.exception.BusinessRuleException;
 import br.com.javamodas.model.Produto;
 import br.com.javamodas.repository.ProdutoRepository;
+import org.apache.tomcat.util.digester.Rules;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -51,9 +52,18 @@ public class ProdutoService {
 
     }
 
-    public Produto validateProductExists(Long idProduct, Long idCategory){
+    protected Produto validateProductExists(Long idProduct, Long idCategory){
         Optional<Produto> productExists = findByIdAndCategoriaId(idProduct, idCategory);
         if (productExists.isEmpty()) throw new EmptyResultDataAccessException(1);
+        return productExists.get();
+
+    }
+
+    protected Produto validateProductExists(Long idProduct){
+        Optional<Produto> productExists = produtoRepository.findById(idProduct);
+        if (productExists.isEmpty()) {
+            throw new BusinessRuleException(String.format("Produto de ID %s não existe", idProduct));
+        }
         return productExists.get();
 
     }
