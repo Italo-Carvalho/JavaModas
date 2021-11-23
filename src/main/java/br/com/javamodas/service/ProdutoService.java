@@ -51,7 +51,7 @@ public class ProdutoService {
 
     }
 
-    protected void updateQuantidadePosVenda(Produto produto){
+    protected void updateQuantidadeProduto(Produto produto){
         produtoRepository.save(produto);
     }
 

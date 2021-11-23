@@ -39,4 +39,11 @@ public class VendaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(vendaService.save(clienteId, vendaRequestDTO));
     }
 
+    @ApiOperation(value = "Deletar venda", nickname = "deleteVenda")
+    @DeleteMapping("/{idVenda}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long idVenda){
+        vendaService.delete(idVenda);
+    }
+
 }

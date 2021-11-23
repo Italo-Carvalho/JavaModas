@@ -6,6 +6,7 @@ import br.com.javamodas.dto.venda.VendaRequestDTO;
 import br.com.javamodas.dto.venda.VendaResponseDTO;
 import br.com.javamodas.exception.BusinessRuleException;
 import br.com.javamodas.model.Cliente;
+import br.com.javamodas.model.ItemVenda;
 import br.com.javamodas.model.Produto;
 import br.com.javamodas.model.Venda;
 import br.com.javamodas.repository.ItemVendaRepository;
@@ -58,6 +59,22 @@ public class VendaService extends AbstractVendaService {
         return returnClienteVendaResponseDTO(vendaSave, itemVendaRepository.findByVendaId(vendaSave.getId()));
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false, rollbackFor = Exception.class)
+    public void delete(Long idVenda){
+        validVendaExists(idVenda);
+        List<ItemVenda> itensvenda = itemVendaRepository.findByVendaId(idVenda);
+        validateProdutoExistsAndReturnEstoque(itensvenda);
+        itemVendaRepository.deleteAll(itensvenda);
+        vendaRepository.deleteById(idVenda);
+    }
+
+    private void validateProdutoExistsAndReturnEstoque(List<ItemVenda> itensvenda){
+        itensvenda.forEach(itemVenda -> {
+            Produto produto = produtoService.validateProductExists(itemVenda.getProduto().getId());
+            produto.setQuantidade(produto.getQuantidade() + itemVenda.getQuantidade());
+            produtoService.updateQuantidadeProduto(produto);
+        });
+    }
 
     private Venda saveVenda(Cliente cliente, VendaRequestDTO vendaRequestDTO) {
         Venda vendaSave = vendaRepository.save(new Venda(vendaRequestDTO.getData(), cliente));
@@ -73,7 +90,7 @@ public class VendaService extends AbstractVendaService {
             Produto produto = produtoService.validateProductExists(item.getIdProduto());
             validQuantidadeProdutoExists(produto, item.getQuantidade());
             produto.setQuantidade(produto.getQuantidade() - item.getQuantidade());
-            produtoService.updateQuantidadePosVenda(produto);
+            produtoService.updateQuantidadeProduto(produto);
         });
     }
 
