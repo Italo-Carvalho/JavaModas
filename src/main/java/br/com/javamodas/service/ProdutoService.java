@@ -3,7 +3,6 @@ package br.com.javamodas.service;
 import br.com.javamodas.exception.BusinessRuleException;
 import br.com.javamodas.model.Produto;
 import br.com.javamodas.repository.ProdutoRepository;
-import org.apache.tomcat.util.digester.Rules;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -50,6 +49,10 @@ public class ProdutoService {
         BeanUtils.copyProperties(product, productSave, "id");
         return produtoRepository.save(productSave);
 
+    }
+
+    protected void updateQuantidadePosVenda(Produto produto){
+        produtoRepository.save(produto);
     }
 
     protected Produto validateProductExists(Long idProduct, Long idCategory){

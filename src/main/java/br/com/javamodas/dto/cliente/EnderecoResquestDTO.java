@@ -1,6 +1,5 @@
 package br.com.javamodas.dto.cliente;
 
-import br.com.javamodas.model.Endereco;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;

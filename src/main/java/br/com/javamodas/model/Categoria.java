@@ -1,10 +1,7 @@
 package br.com.javamodas.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import java.util.Objects;
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "categoria")

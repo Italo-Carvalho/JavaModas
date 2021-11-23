@@ -25,6 +25,9 @@ public class JavaModasExceptionHandler extends ResponseEntityExceptionHandler {
     private static final String LENGTH = "Length";
     private static final String NOT_NULL = "NotNull";
     private static final String PATTERN = "Pattern";
+    private static final String MIN = "Min";
+
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<Error> errors = generetedListError(ex.getBindingResult());
@@ -44,6 +47,9 @@ public class JavaModasExceptionHandler extends ResponseEntityExceptionHandler {
         }
         if (fieldError.getCode().equals(PATTERN)){
             return fieldError.getDefaultMessage().concat(" invalid format");
+        }
+        if (fieldError.getCode().equals(MIN)){
+            return fieldError.getDefaultMessage().concat(String.format(" must be greater than or equal to %s", fieldError.getArguments()[1]));
         }
         return fieldError.toString();
     }

@@ -4,7 +4,6 @@ package br.com.javamodas.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Properties;
 
 @Entity
 @Table(name = "item_venda")

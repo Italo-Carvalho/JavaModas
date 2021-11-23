@@ -12,8 +12,8 @@ CREATE TABLE cliente (
 	estado VARCHAR(30)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
-INSERT INTO cliente (nome, telefone, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) values ('João Silva', '(98) 1234-4321', true, 'Rua do Abacaxi', '10', null, 'Brasil', '38.400-122', 'Uberlândia', 'MG');
-INSERT INTO cliente (nome, telefone, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) values ('Maria Rita', '(98) 1234-4321', true, 'Rua do Sabiá', '110', 'Apto 101', 'Colina', '11.400-122', 'Ribeirão Preto', 'SP');
+INSERT INTO cliente (nome, telefone, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) values ('Ítalo Carvalho', '(98) 1234-4321', true, 'Rua do Abacaxi', '10', null, 'Brasil', '38.400-122', 'Uberlândia', 'MG');
+INSERT INTO cliente (nome, telefone, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) values ('Thayane Crystal', '(98) 1234-4321', true, 'Rua do Sabiá', '110', 'Apto 101', 'Colina', '11.400-122', 'Ribeirão Preto', 'SP');
 INSERT INTO cliente (nome, telefone, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) values ('Pedro Santos', '(98) 1234-4321', true, 'Rua da Bateria', '23', null, 'Morumbi', '54.212-122', 'Goiânia', 'GO');
 INSERT INTO cliente (nome, telefone, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) values ('Ricardo Pereira', '(98) 1234-4321', true, 'Rua do Motorista', '123', 'Apto 302', 'Aparecida', '38.400-122', 'Salvador', 'BA');
 INSERT INTO cliente (nome, telefone, ativo, logradouro, numero, complemento, bairro, cep, cidade, estado) values ('Josué Mariano', '(98) 1234-4321', true, 'Av Rio Branco', '321', null, 'Jardins', '56.400-122', 'Natal', 'RN');

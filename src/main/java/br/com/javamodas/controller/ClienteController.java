@@ -1,11 +1,9 @@
 package br.com.javamodas.controller;
 
 
-import br.com.javamodas.dto.categoria.CategoriaResponseDTO;
 import br.com.javamodas.dto.cliente.ClienteRequestDTO;
 import br.com.javamodas.dto.cliente.ClienteResponseDTO;
 import br.com.javamodas.model.Cliente;
-import br.com.javamodas.repository.ClienteRepository;
 import br.com.javamodas.service.ClienteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

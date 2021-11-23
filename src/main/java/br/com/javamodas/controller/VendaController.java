@@ -1,15 +1,16 @@
 package br.com.javamodas.controller;
 
 import br.com.javamodas.dto.venda.ClienteVendaResponseDTO;
+import br.com.javamodas.dto.venda.VendaRequestDTO;
 import br.com.javamodas.service.VendaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Api(tags = "Venda")
 @RestController
@@ -30,6 +31,12 @@ public class VendaController {
     @GetMapping("/cliente/{clienteId}")
     public ResponseEntity<ClienteVendaResponseDTO> listAllByCliente(@PathVariable Long clienteId){
         return ResponseEntity.ok(vendaService.listAllByClienteId(clienteId));
+    }
+
+    @ApiOperation(value = "Salvar venda", nickname = "saveVenda")
+    @PostMapping("/cliente/{clienteId}")
+    public ResponseEntity<ClienteVendaResponseDTO> save(@PathVariable Long clienteId,@Valid @RequestBody VendaRequestDTO vendaRequestDTO){
+        return ResponseEntity.status(HttpStatus.CREATED).body(vendaService.save(clienteId, vendaRequestDTO));
     }
 
 }
