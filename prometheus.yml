@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'Java-Modas'
+    scrape_interval: 5s
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['192.168.1.2:8080']
+
+# http_server_requests_seconds_count{job="Java-Modas", uri="/categoria"}
+# http_server_requests_seconds_count{job="Java-Modas", uri="/categoria/{id}"}
