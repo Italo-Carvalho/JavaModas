@@ -1,11 +1,27 @@
 version: "3.8"
 
 services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: java_modas_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - jaeger
+      - prometheus
+      - grafana
+    command: ["-c", "/app/wait-for-mysql.sh mysql:3307 && java -jar /app/javamodas.jar"]
+    entrypoint: ["/bin/sh"]
+
   db:
     image: mysql:8.0.22
     container_name: mysql
     ports:
-      - 3307:3307
+      - "3307:3307"
     environment:
       MYSQL_USER: javamodas
       MYSQL_PASSWORD: javamodas
@@ -17,14 +33,14 @@ services:
     image: jaegertracing/all-in-one:1.27
     container_name: jaeger
     ports:
-      - 5775:5775/udp
-      - 6831:6831/udp
-      - 6832:6832/udp
-      - 5778:5778
-      - 16686:16686
-      - 14268:14268
-      - 14250:14250
-      - 9411:9411
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "14250:14250"
+      - "9411:9411"
 
   prometheus:
     image: prom/prometheus:v2.31.1
@@ -40,4 +56,4 @@ services:
     image: grafana/grafana:8.2.5
     container_name: grafana
     ports:
-      - 3000:3000
+      - "3000:3000"

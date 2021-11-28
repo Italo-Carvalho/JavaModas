@@ -11,7 +11,7 @@ scrape_configs:
     scrape_interval: 5s
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['192.168.1.2:8080']
+      - targets: ['app:8080']
 
 # http_server_requests_seconds_count{job="Java-Modas", uri="/categoria"}
 # http_server_requests_seconds_count{job="Java-Modas", uri="/categoria/{id}"}
